@@ -55,12 +55,14 @@ function computerPicker() {
 };
 
 function userPicker(response) {
-    while (!['rock', 'paper', 'scissors'].includes(response.toLowerCase())) {
+    while (!response == undefined) {
+        while (!['rock', 'paper', 'scissors'].includes(response.toLowerCase())) {
         console.log('you can only pick rock, paper, or scissors')
         response = prompt("Please pick rock paper, or scissors." )
-    }
+        }
     console.log("you've chosen " + response)
-    return response
+    return response } 
+    response = prompt("give response!")
     };
 
 function rpsEvaluator(humanPick, npcPick) {
