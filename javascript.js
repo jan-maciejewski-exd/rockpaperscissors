@@ -16,7 +16,8 @@ alert("Welcome to the game of rock paper scissors. To begin, pick rock paper, or
 while (wannaKeepPlaying) {
     while (scoreMax < 5) {
         let input = prompt("Pick rock paper, or scissors." )
-        
+        while (input == undefined) { 
+            input = prompt("give response!") }
         let computerPick1 = computerPicker()
 
         userPicker(input)
@@ -55,14 +56,12 @@ function computerPicker() {
 };
 
 function userPicker(response) {
-    while (!response == undefined) {
-        while (!['rock', 'paper', 'scissors'].includes(response.toLowerCase())) {
+    while (!['rock', 'paper', 'scissors'].includes(response.toLowerCase())) {
         console.log('you can only pick rock, paper, or scissors')
         response = prompt("Please pick rock paper, or scissors." )
         }
     console.log("you've chosen " + response)
-    return response } 
-    response = prompt("give response!")
+    return response
     };
 
 function rpsEvaluator(humanPick, npcPick) {
