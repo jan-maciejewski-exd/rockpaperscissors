@@ -14,7 +14,7 @@ let userScore = 0
 alert("Welcome to the game of rock paper scissors. To begin, pick rock paper, or scissors. You'll play against a computer. Trzy po trzy!")
 
 while (wannaKeepPlaying) {
-    while (scoreMax < 3) {
+    while (scoreMax < 5) {
         let input = prompt("Pick rock paper, or scissors." )
         
         let computerPick1 = computerPicker()
@@ -24,9 +24,18 @@ while (wannaKeepPlaying) {
         console.log('the computer has chosen ' + computerPick1)
         rpsEvaluator(input, computerPick1)
         updateScore()
+        console.log("The score: human:" + userScore + ", computer: " + computerScore)
+    }
+    if (computerScore == 5) {
+        alert("The computer has won the game!")
+    } else {
+        alert("You have won the game!")
     }
     wantMore = confirm('wanna keep playing?')
     if (wantMore) {
+        computerScore = 0
+        userScore = 0
+        updateScore()
         wannaKeepPlaying = true
     } else {
         wannaKeepPlaying = false
@@ -35,10 +44,10 @@ while (wannaKeepPlaying) {
 
 
 function computerPicker() {
-    let thepick = Math.random()
-    if (thepick < 0.33) {
+    let random = Math.random()
+    if (random < 0.33) {
         return 'rock'
-    } else if (thepick > 0.66) {
+    } else if (random < 0.66) {
         return 'paper'
     } else {
         return 'scissors'
@@ -46,13 +55,13 @@ function computerPicker() {
 };
 
 function userPicker(response) {
-    if (['rock', 'paper', 'scissors'].includes(response)) {
-        console.log("you've chosen " + response)
-    } else {
-        console.log('pick rock, paper, or scissors')
-        input
+    while (!['rock', 'paper', 'scissors'].includes(response.toLowerCase())) {
+        console.log('you can only pick rock, paper, or scissors')
+        response = prompt("Please pick rock paper, or scissors." )
     }
-};
+    console.log("you've chosen " + response)
+    return response
+    };
 
 function rpsEvaluator(humanPick, npcPick) {
     if (humanPick == 'rock') {
