@@ -43,6 +43,7 @@ while (wannaKeepPlaying) {
     }
 }
 
+// Functions
 
 function computerPicker() {
     let random = Math.random()
