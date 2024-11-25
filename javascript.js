@@ -1,47 +1,44 @@
 // Rock paper scissors:
 // 1 show a welcome message explaining to the user the game
-// 2 take input for r/p/s
+// 2 take choice for r/p/s
 // 3 generate computer pick and return it to console - random number, if <0.33 rock, 0.33<>0.66 paper, 0.66< scissors
 // evaluate who wins, update score
-// requires input, computer pick func, evaluate func, update score, maybe play to 3 wins so loop
+// requires choice, computer pick func, evaluate func, update score, maybe play to 3 wins so loop
 
 
 let wannaKeepPlaying = true
 let scoreMax = 0
 let computerScore = 0
 let userScore = 0
+let choice = ""
+let welcome = document.querySelector(".welcome")
+const buttons = document.querySelectorAll('button')
 
-alert("Welcome to the game of rock paper scissors. To begin, pick rock paper, or scissors. You'll play against a computer. Trzy po trzy!")
+welcome.textContent = "Welcome to the game of rock paper scissors. To begin, pick rock paper, or scissors. You'll play against a computer. Trzy po trzy!"
 
-while (wannaKeepPlaying) {
-    while (scoreMax < 5) {
-        let input = prompt("Pick rock paper, or scissors." )
-        while (input == undefined) { 
-            input = prompt("give response!") }
-        let computerPick1 = computerPicker()
-
-        userPicker(input)
-
-        console.log('the computer has chosen ' + computerPick1)
-        rpsEvaluator(input, computerPick1)
-        updateScore()
-        console.log("The score: human:" + userScore + ", computer: " + computerScore)
-    }
-    if (computerScore == 5) {
-        alert("The computer has won the game!")
-    } else {
-        alert("You have won the game!")
-    }
-    wantMore = confirm('wanna keep playing?')
-    if (wantMore) {
-        computerScore = 0
-        userScore = 0
-        updateScore()
-        wannaKeepPlaying = true
-    } else {
-        wannaKeepPlaying = false
-    }
-}
+// while (scoreMax < 5) {
+//     // while (choice == undefined) { 
+//     //     choice = prompt("give response!") }
+    
+    
+//     rpsEvaluator(choice, computerPick1)
+//     updateScore()
+//     console.log("The score: human:" + userScore + ", computer: " + computerScore)
+// }
+// if (computerScore == 5) {
+//     alert("The computer has won the game!")
+// } else {
+//     alert("You have won the game!")
+// }
+// wantMore = confirm('wanna keep playing?')
+// if (wantMore) {
+//     computerScore = 0
+//     userScore = 0
+//     updateScore()
+//     wannaKeepPlaying = true
+// } else {
+//     wannaKeepPlaying = false
+// }
 
 // Functions
 
@@ -56,14 +53,24 @@ function computerPicker() {
     }
 };
 
-function userPicker(response) {
-    while (!['rock', 'paper', 'scissors'].includes(response.toLowerCase())) {
-        console.log('you can only pick rock, paper, or scissors')
-        response = prompt("Please pick rock paper, or scissors." )
-        }
-    console.log("you've chosen " + response)
-    return response
-    };
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        choice = button.textContent
+        let computerPick1 = computerPicker()
+        document.querySelector(".hPick").textContent = `You chose ${choice}`
+        document.querySelector(".cPick").textContent = `The computer chose ${computerPick1}`
+        rpsEvaluator(choice, computerPick1) 
+    })
+})
+
+// function userPicker () {
+//     while (!['rock', 'paper', 'scissors'].includes(response.toLowerCase())) {
+//         console.log('you can only pick rock, paper, or scissors')
+//         response = 
+//         }
+//     console.log("you've chosen " + response)
+//     return response
+//     };
 
 function rpsEvaluator(humanPick, npcPick) {
     if (humanPick == 'rock') {
